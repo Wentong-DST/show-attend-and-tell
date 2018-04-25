@@ -10,9 +10,7 @@
 
 ## References
 
-Author's theano code: https://github.com/kelvinxu/arctic-captions 
-
-Another tensorflow implementation: https://github.com/jazzsaxmafia/show_attend_and_tell.tensorflow
+This is based on Yunjey's [show-attend-and-tell](https://github.com/yunjey/show-attend-and-tell) repository.
 
 <br/>
 
@@ -61,15 +59,6 @@ $ python train.py
 ```
 <br>
 
-### (optional) Tensorboard visualization
-
-I have provided a tensorboard visualization for real-time debugging.
-Open the new terminal, run command below and open `http://localhost:6005/` into your web browser.
-
-```bash
-$ tensorboard --logdir='./log' --port=6005 
-```
-<br>
 
 ### Evaluate the model 
 
@@ -87,22 +76,14 @@ To generate captions, visualize attention weights and evaluate the model, please
 ##### (1) Generated caption: A plane flying in the sky with a landing gear down.
 ![alt text](jpg/train2.jpg "train image")
 
-##### (2) Generated caption: A giraffe and two zebra standing in the field.
-![alt text](jpg/train.jpg "train image")
-
 #### Validation data
 
 ##### (1) Generated caption: A large elephant standing in a dry grass field.
 ![alt text](jpg/val.jpg "val image")
-
-##### (2) Generated caption: A baby elephant standing on top of a dirt field.
-![alt text](jpg/val2.jpg "val image")
 
 #### Test data
 
 ##### (1) Generated caption: A plane flying over a body of water.
 ![alt text](jpg/test.jpg "test image")
 
-##### (2) Generated caption: A zebra standing in the grass near a tree.
-![alt text](jpg/test2.jpg "test image")
 
