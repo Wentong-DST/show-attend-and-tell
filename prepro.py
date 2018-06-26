@@ -10,6 +10,7 @@ import hickle
 import os
 import json
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 def _process_caption_data(caption_file, image_dir, max_length):
     with open(caption_file) as f:
@@ -41,7 +42,8 @@ def _process_caption_data(caption_file, image_dir, max_length):
         if len(caption.split(" ")) > max_length:
             del_idx.append(i)
     
-    # delete captions if size is larger than max_length
+    # Warning!
+    # DELETE captions if size is larger than max_length
     print "The number of captions before deletion: %d" %len(caption_data)
     caption_data = caption_data.drop(caption_data.index[del_idx])
     caption_data = caption_data.reset_index(drop=True)
@@ -122,10 +124,12 @@ def _build_image_idxs(annotations, id_to_idx):
 def main():
     # batch size for extracting feature vectors from vggnet.
     batch_size = 100
-    # maximum length of caption(number of word). if caption is longer than max_length, deleted.  
-    max_length = 15
+    # NUMBER OF WORDS, maximum length of caption. if caption is longer than max_length, deleted.  
+    max_length = 50
     # if word occurs less than word_count_threshold in training dataset, the word index is special unknown token.
-    word_count_threshold = 1
+    # 1317 vocab size if no deletion
+    # 1066 vocab size for 2, 895 for 3
+    word_count_threshold = 3
     # vgg model path 
     vgg_model_path = './data/imagenet-vgg-verydeep-19.mat'
 
@@ -183,6 +187,8 @@ def main():
     # extract conv5_3 feature vectors
     vggnet = Vgg19(vgg_model_path)
     vggnet.build()
+    
+    
     with tf.Session() as sess:
         tf.initialize_all_variables().run()
         for split in ['train', 'val', 'test']:
